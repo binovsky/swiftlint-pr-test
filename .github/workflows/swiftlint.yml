@@ -28,10 +28,14 @@ jobs:
           swift:
             - 'added|modified: ["**/*.swift"]'
 
-    - name: Lint changed files
-      if: steps.filter.outputs.swift != 'false' && steps.filter.outputs.swift_files != ''
+    - name: Debug output
       run: |
-        echo "Changed files: ${{ steps.filter.outputs.swift_files }}"
+        echo "Swift filter result: ${{ steps.filter.outputs.swift }}"
+        echo "Swift files: ${{ steps.filter.outputs.swift_files }}"
+
+    - name: Lint changed files
+      if: steps.filter.outputs.swift == 'true' && steps.filter.outputs.swift_files != ''
+      run: |
         swiftlint lint \
           --reporter github-actions \
           --config .swiftlint.yml \
