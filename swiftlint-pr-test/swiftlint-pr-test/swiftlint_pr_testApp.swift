@@ -11,6 +11,8 @@ import SwiftUI
 struct SwiftLintPRTestApp: App {
     var body: some Scene {
         WindowGroup {
+            
+            
             ContentView()
         }
     }
