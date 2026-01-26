@@ -18,4 +18,4 @@ jobs:
     - name: Check swift codestyle
       uses: cirruslabs/swiftlint-action@v1
       with:
-        args: --path ${{ steps.changes.outputs.files }} --config .swiftlint.yml --strict
+        args: --config .swiftlint.yml --strict ${{ steps.changes.outputs.files }}
