@@ -26,7 +26,7 @@ jobs:
         list-files: shell
         filters: |
           swift:
-            - 'added|modified: ["**/*.swift"]'
+            - added|modified: '**/*.swift'
 
     - name: Debug output
       run: |
