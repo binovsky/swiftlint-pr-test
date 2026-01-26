@@ -11,25 +11,29 @@ permissions:
 jobs:
   lint:
     name: SwiftLint
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v4
       with:
-          fetch-depth: 0
+        fetch-depth: 0
     
     - name: Filter changed Swift files
       id: filter
       uses: dorny/paths-filter@v3
       with:
-        token: ''  # Force git-based detection (fixes API misses)
+        token: ${{ secrets.GITHUB_TOKEN }}
         list-files: shell
         filters: |
           swift:
             - 'added|modified: ["**/*.swift"]'
 
     - name: Lint changed files
-      if: steps.filter.outputs.swift != 'false'
-      uses: cirruslabs/swiftlint-action@v1
-      with:
-        args: --config .swiftlint.yml --strict ${{ steps.filter.outputs.swift_files }}
+      if: steps.filter.outputs.swift != 'false' && steps.filter.outputs.swift_files != ''
+      run: |
+        echo "Changed files: ${{ steps.filter.outputs.swift_files }}"
+        swiftlint lint \
+          --reporter github-actions \
+          --config .swiftlint.yml \
+          --strict \
+          ${{ steps.filter.outputs.swift_files }}
