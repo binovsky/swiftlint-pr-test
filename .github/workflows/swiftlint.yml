@@ -15,7 +15,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Check swift codestyle
+    
+    - name: Filter changed Swift files
+      id: filter
+      uses: dorny/paths-filter@v3
+      with:
+        list-files: shell  # Space-separated paths output
+        filters: |
+          swift:
+            - 'added|modified: ["**/*.swift"]'  # Only added/modified Swift files
+
+    - name: Lint changed files
+      if: steps.filter.outputs.swift != 'false' && steps.filter.outputs.swift_files != ''
       uses: cirruslabs/swiftlint-action@v1
       with:
-        args: --config .swiftlint.yml --strict ${{ steps.changes.outputs.files }}
+        args: --config .swiftlint.yml --strict ${{ steps.filter.outputs.swift_files }}
