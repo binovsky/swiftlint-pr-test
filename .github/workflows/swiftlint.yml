@@ -33,4 +33,4 @@ jobs:
       uses: cirruslabs/swiftlint-action@v1
       with:
         version: latest
-        args: --config .swiftlint.yml --strict ${{ steps.filter.outputs.swift_files }}
+        args: --config ${{ github.workspace }}/.swiftlint.yml --strict ${{ steps.filter.outputs.swift_files }}
