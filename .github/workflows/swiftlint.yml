@@ -28,13 +28,6 @@ jobs:
           swift:
             - added|modified: '**/*.swift'
             
-    - name: Debug paths
-      run: |
-        echo "github.workspace: ${{ github.workspace }}"
-        echo "Current directory: $(pwd)"
-        ls -la ${{ github.workspace }}/
-        ls -la ${{ github.workspace }}/.swiftlint.yml
-
     - name: Lint changed files
       if: steps.filter.outputs.swift == 'true' && steps.filter.outputs.swift_files != ''
       uses: cirruslabs/swiftlint-action@v1
