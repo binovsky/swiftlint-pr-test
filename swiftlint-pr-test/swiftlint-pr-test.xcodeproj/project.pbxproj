@@ -10,9 +10,23 @@
 		634264BC2F27C8740062D165 /* swiftlint-pr-test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "swiftlint-pr-test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		63FC0BCE2F29F22A005F5628 /* Exceptions for "swiftlint-pr-test" folder in "swiftlint-pr-test" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				MUBIKit/Package.swift,
+				MUBIKit/Sources/MUBIKit/MUBIKit.swift,
+			);
+			target = 634264BB2F27C8740062D165 /* swiftlint-pr-test */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		634264BE2F27C8740062D165 /* swiftlint-pr-test */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				63FC0BCE2F29F22A005F5628 /* Exceptions for "swiftlint-pr-test" folder in "swiftlint-pr-test" target */,
+			);
 			path = "swiftlint-pr-test";
 			sourceTree = "<group>";
 		};
