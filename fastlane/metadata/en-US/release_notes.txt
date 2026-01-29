@@ -1,0 +1,3 @@
+- We are very happy to introduce you to our brand new logo
+- For most offline films we’ll now automatically download all available subtitles
+- Fixed a background activity issue affecting some users

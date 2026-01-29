@@ -1,0 +1,5 @@
+The app streams films that are FULLY LICENSED and curated by our editorial team on a per territory basis, enforced by IP based geolocating. The film catalogue is 100% English globally with localisations in 10 languages.
+
+A demo account without a subscription for testing the subscription flows:
+Email: jstuehler+review@mubi.com
+Password: review
