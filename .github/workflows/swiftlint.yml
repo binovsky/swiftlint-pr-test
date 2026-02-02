@@ -32,8 +32,8 @@ jobs:
       id: process_files
       if: steps.filter.outputs.swift == 'true' && steps.filter.outputs.swift_files != ''
       run: |
-        # Convert JSON array to properly quoted space-separated paths
-        files=$(echo '${{ steps.filter.outputs.swift_files }}' | jq -r '.[] | @sh' | tr '\n' ' ')
+        # Convert JSON array to space-separated paths with double quotes
+        files=$(echo '${{ steps.filter.outputs.swift_files }}' | jq -r '.[] | "\"" + . + "\""' | tr '\n' ' ')
         echo "processed_files=$files" >> $GITHUB_OUTPUT
 
     - name: Lint changed files
