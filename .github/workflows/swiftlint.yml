@@ -23,14 +23,22 @@ jobs:
       uses: dorny/paths-filter@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        list-files: shell
+        list-files: json
         filters: |
           swift:
             - added|modified: '**/*.swift'
-            
-    - name: Lint changed files
+
+    - name: Process file paths for SwiftLint
+      id: process_files
       if: steps.filter.outputs.swift == 'true' && steps.filter.outputs.swift_files != ''
+      run: |
+        # Convert JSON array to properly quoted space-separated paths
+        files=$(echo '${{ steps.filter.outputs.swift_files }}' | jq -r '.[] | @sh' | tr '\n' ' ')
+        echo "processed_files=$files" >> $GITHUB_OUTPUT
+
+    - name: Lint changed files
+      if: steps.filter.outputs.swift == 'true' && steps.process_files.outputs.processed_files != ''
       uses: cirruslabs/swiftlint-action@v1
       with:
         version: latest
-        args: --config ${{ github.workspace }}/.swiftlint.yml --strict --force-exclude ${{ steps.filter.outputs.swift_files }}
+        args: --config ${{ github.workspace }}/.swiftlint.yml --strict --force-exclude ${{ steps.process_files.outputs.processed_files }}
